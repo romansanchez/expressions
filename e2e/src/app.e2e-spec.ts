@@ -9,6 +9,6 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to keysight-tech!');
+    expect(page.getTitleText()).toEqual('Expression Area');
   });
 });

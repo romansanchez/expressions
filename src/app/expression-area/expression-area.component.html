@@ -1,0 +1,5 @@
+<div class="expression-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+    <div *ngFor="let expression of expressions">
+      <app-expression [expression]="expression" ></app-expression>
+    </div>
+</div>

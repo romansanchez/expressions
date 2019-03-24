@@ -1,0 +1,9 @@
+.expression-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: .25em;
+    text-align: center;
+    .expression-name {
+        border: 2px solid black;
+    }
+}

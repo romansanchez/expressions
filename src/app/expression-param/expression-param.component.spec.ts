@@ -1,0 +1,64 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { ExpressionParamComponent } from './expression-param.component';
+import { ExpressionComponent } from '../expression/expression.component';
+import { DropService } from '../drop.service';
+
+describe('ExpressionParamComponent', () => {
+  let component: ExpressionParamComponent;
+  let fixture: ComponentFixture<ExpressionParamComponent>;
+  let dropSvc: DropService;
+  const mockEvent = {
+    'preventDefault': () => {},
+    'stopPropagation': () => {}
+  };
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        ExpressionParamComponent,
+        ExpressionComponent
+      ],
+      providers: [
+        DropService
+      ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ExpressionParamComponent);
+    component = fixture.componentInstance;
+    dropSvc = TestBed.get(DropService);
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should init with no expressions', () => {
+    expect(component.expressions.length).toBe(0);
+  });
+
+  describe('onDrop', () => {
+    it('should call drop service', () => {
+      spyOn(dropSvc, 'onDrop');
+      component.onDrop(mockEvent);
+      expect(dropSvc.onDrop).toHaveBeenCalledTimes(1);
+      expect(dropSvc.onDrop).toHaveBeenCalledWith(mockEvent);
+    });
+    it('should set expression', () => {
+      const mockEvents = [{
+        'name': 'foo',
+        'argsLen': 2
+      }];
+      spyOn(dropSvc, 'onDrop').and.returnValue(mockEvents);
+      component.onDrop(mockEvent);
+      expect(component.expressions.length).toBe(1);
+      expect(component.expressions[0]['name']).toBe('foo');
+      expect(component.expressions[0]['argsLen']).toBe(2);
+    });
+  });
+
+});

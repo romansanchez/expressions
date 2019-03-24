@@ -1,0 +1,4 @@
+<div class="expression-param" (drop)="onDrop($event)" (dragover)="onDragOver($event)">param</div>
+<div *ngFor="let expression of expressions">
+    <app-expression [expression]="expression"></app-expression>
+</div>

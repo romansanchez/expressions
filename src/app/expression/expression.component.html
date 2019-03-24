@@ -1,0 +1,6 @@
+<div class="expression-container">
+    <div class="expression-name">{{ expression.name }}</div>
+    <div *ngFor="let param of expressionParams">
+        <app-expression-param></app-expression-param>
+    </div>
+</div>
